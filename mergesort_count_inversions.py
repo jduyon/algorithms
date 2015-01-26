@@ -12,7 +12,7 @@ This will only count an inversion if the element in the second half of array is 
 """
 import random
 def merge_sort(a):
-    inversions = 0
+    global inversions
     mid = len(a) / 2
     if len(a) > 1:
         first = a[:mid]
@@ -23,14 +23,16 @@ def merge_sort(a):
         j = 0
         k = 0
         while (i < len(first) and j < len(second)):
-            if first[i] <= second[j]:
+            if first[i] < second[j]:
                 a[k] = first[i]
                 i += 1
-            elif second[j] < first[i]:
+            else:
                 a[k] = second[j]
+                trial = second[j]
                 j += 1
                 inversions += len(first[i:])
-                
+#                print ("Inversion:",len(first[i:]),trial)
+                  
             k += 1
         while (i < len(first)):
             a[k] = first[i]
@@ -42,5 +44,18 @@ def merge_sort(a):
             k += 1
     return a,inversions
 
-a = [5,6,7,8,1,2,3,4]
-print merge_sort(a)
+a = [int(i.rstrip()) for i in open("IntegerArray.txt","r").readlines()]
+#print a
+#a=[8,7,6,5,4,3,2,1]
+#print merge_sort(a)
+
+inversions = 0
+def test_merge_sort():
+    global inversions
+#    a = [[4,3,2,1],[1,2,3,4,5,6],[1,3,5,2,4,6], [1,5,3,2,4], [5,4,3,2,1], [1,6,3,2,4,5]]
+#    for i in xrange(len(a)):
+    inversions = 0
+    #print "LIST: " + str(a[i])
+    print merge_sort(a)
+
+test_merge_sort()
