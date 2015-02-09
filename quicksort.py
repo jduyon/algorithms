@@ -1,9 +1,9 @@
 
 
 ar = [4,5,1,3,9,10]
-
-def choose_pivot(a,n):
-    return 1
+print ar
+def choose_pivot():
+    return 0
 
 
 def partition(list,left_index,right_index):
@@ -17,34 +17,26 @@ def partition(list,left_index,right_index):
     that element is swapped to the left of the less than tracker 'i'. Finally at the end, the pivot
     element is placed at position 'i-1', which is between the greater than and less than subarrays of numbers.
     """
+    pivot = choose_pivot()
     p = list[left_index]
     i = left_index + 1
     # Start J to the right of p
-    for j in xrange(1,right_index):
-        if j > right_index -1:
-            break
+    for j in xrange(i,right_index):
         if list[j] < p:
             list[j],list[i] = list[i], list[j]
             i = i+1
     list[left_index],list[i-1] = list[i-1], list[left_index]
-    return list
+    return i
 
-def quicksort(a,length):
+def quicksort(a,low,high):
     print "recursed"
-    if length <= 1:
-        print a
-        return [a]
-    else:
-        p = choose_pivot(a,length)
-        left_a = a[:p]
-        right_a = a[p:]
-        left_a = partition(left_a,p,len(left_a))
-        right_a = partition(right_a,p,len(right_a))
-        print left_a,right_a
+    if low < high:
+        p = partition(a,low,high)
+        quicksort(a, low, p-1)
+        quicksort(a,p+1,high)
+    print a
 
-        return quicksort(left_a,len(left_a)) + [] + quicksort(right_a,len(right_a))
-
-print quicksort(ar,len(ar)-1)
+quicksort(ar,0,len(ar))
 
 #print ar,len(ar)
 
