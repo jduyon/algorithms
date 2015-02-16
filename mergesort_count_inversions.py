@@ -10,7 +10,6 @@
     back up the call stack. This process is repeated for all merge_sort calls with an array where n=1.
 This will only count an inversion if the element in the second half of array is less than (but not equal to) the left half.
 """
-import random
 def merge_sort(a):
     global inversions
     mid = len(a) / 2
