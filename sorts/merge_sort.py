@@ -55,8 +55,16 @@ class MergeSort(object):
             return a
     
 def helper():
-    print 'mergesort_with_inversions.py \n\n\t-i <inputfie> or --input-file <inputlist> \n\n\t-v <True/False (default is False)> or --verbose <True/False>\n'
-    print "merge_sort_wrapper(example_array,0,len(example_array)-1,verbose=verbose)"
+    doc = """ mergesort_with_inversions.py
+
+        -i <inputfilepath> or --input-file <inputfilepath>
+
+        -v (default is False)> or --verbose
+
+        -c or --count-inversions
+
+    merge_sort_wrapper(example_array,0,len(example_array)-1,verbose=verbose)
+    """
     sys.exit(2)
 
 if __name__ == "__main__":
@@ -64,9 +72,10 @@ if __name__ == "__main__":
     parser.add_option("-i", "--input-file", dest="input_file",
                       help="Full path to input file.")
     parser.add_option("-v", "--verbose", dest="verbose",
-                      help="Verbosity mode!")
+                      action='store_true',help="Verbosity mode!")
     parser.add_option("-c", "--count-inversions", dest="inversion_count",
-                      help="Verbosity mode!")
+                      action='store_true',help="Count number of times" \
+                         "there was an inversion.")
 
     (opts, args) = parser.parse_args()
     if not opts.input_file:
