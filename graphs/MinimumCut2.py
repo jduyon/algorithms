@@ -1,5 +1,5 @@
 import random, copy
-from f_to_array import integer_rows_to_dict
+from inputs.f_to_array import integer_rows_to_dict
 
 def choose_random_key(G):
     v1 = random.choice(list(G.keys()))

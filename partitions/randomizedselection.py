@@ -1,7 +1,7 @@
 import random
 from partitions.partition import partition
 from partitions.randomized_partition import randomized_partition
-from files.f_to_array import f_to_array
+from inputs.f_to_array import f_to_array
 
 # Partition is a very important algorithm!
 
