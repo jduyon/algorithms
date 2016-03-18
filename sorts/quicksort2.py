@@ -36,7 +36,7 @@ def quicksort(A,low,high, verbose=True):
     if verbose:
         print "OUT",A
 
-def help():
+def helper():
     print 'quicksort.py \n\n\t-i <inputfie> or --input-file <inputlist> \n\n\t-v <True/False (default is False)> or --verbose <True/False>\n'
     print "Example array:",example_array
     print "quicksort(example_array,0,len(example_array)-1,verbose=verbose)"
@@ -51,7 +51,7 @@ if __name__ == "__main__":
 
     (opts, args) = parser.parse_args()
     if not opts.input_file:
-        help()
+        helper()
         quit()
     if not opts.verbose:
         v = False

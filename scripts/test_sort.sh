@@ -1,13 +1,14 @@
+unsorted_integers=../files/IntegerArray.txt
 f(){
-  sort ~/Desktop/Projects/Algorithms/IntegerArray.txt > test1.txt
+  sort ${unsorted_integers} > /dev/null
 }
 
 g(){
-  python quicksort2.py -i ~/Desktop/Projects/Algorithms/IntegerArray.txt > test.txt
+  python ../sorts/quicksort2.py -i ${unsorted_integers} > /dev/null
 }
 
 h(){
-  python mergesort_count_inversions.py > test.txt
+  python ../sorts/mergesort_count_inversions.py > /dev/null
 }
 
 randomselection(){
@@ -17,8 +18,8 @@ randomselection(){
     done
 }
 
-#time f
-#time g
-#time h
+time f
+time g
+time h
 
-time randomselection
+#time randomselection
