@@ -6,3 +6,6 @@ class Node:
     left = right = parent = None
     def __init__(self, data):
         self.data = data
+    def is_leaf(self):
+        if self.right == self.left == None:
+            return True
