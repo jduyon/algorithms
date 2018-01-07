@@ -175,4 +175,30 @@ class BinaryTree:
                 replacement.parent = None
                 self.root = replacement
 
+    def sort(self):
+        """
+        Sort the binary tree from least to greatest. First, the algorithm
+        starts by recursively yielding the left branch from root until
+        a leaf node is reached. Then, it's parent is yielded. This process
+        is repeated for the right branch, and all nodes are now traversed.
+        """
+
+        if not self.root:
+            return
+        else:
+            return self._sort(self.root)
+
+    def _sort(self,node):
+        """
+        Recursive sort generator for a binary tree.
+
+        :param node: A node.
+        """
+        if node:
+            #TODO: In python3 remove the for loop with "yield from"
+            for node_ in self._sort(node.left):
+                yield node_
+            yield node
+            for node_ in self._sort(node.right):
+                yield node_
 

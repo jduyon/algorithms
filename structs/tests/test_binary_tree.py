@@ -248,3 +248,28 @@ class TestCaseBinaryTreeDeleteNode:
         print expected, actual
         assert(expected == actual)
 
+
+class TestCaseBinaryTreeSort:
+    def test_inorder_sort_example(self):
+        # Node.left doesn't exist. Node.right becomes repl.
+        sequence = [11, 6, 8, 19, 4, 10, 5, 17, 43, 49, 31,37]
+        bt = BinaryTree(sequence)
+        expected = [4,5,6,8,10,11,17,19,31,37,43,49]
+        actual = [node_.data for node_ in bt.sort()]
+        print expected, actual
+        assert(expected == actual)
+
+    def test_sort_random_examples(self):
+        for i in range(10):
+            num_nodes = 1000
+            sequence = random.sample(range(1, 10000), num_nodes)
+            bt = BinaryTree(sequence)
+            actual = [node_.data for node_ in bt.sort()]
+            actual = list(actual)
+            min_node = min(actual)
+            max_node = max(actual)
+            expected = sorted(actual)
+            print max_node, actual[-1]
+            assert(min_node == actual[0])
+            assert(max_node == actual[-1])
+            assert(actual == expected)
