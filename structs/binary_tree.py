@@ -202,3 +202,64 @@ class BinaryTree:
             for node_ in self._sort(node.right):
                 yield node_
 
+    def left_rotate(self,node):
+        """
+        Rotate a node's right child (other_node) into node, while preserving BST
+        properties. Other_node will take the place of node and all of it's
+        connections. Node will become the child of other_node.
+
+        :param node: A node that has a right child.
+        """
+        other_node = node.right
+
+        # Reset other_node's children/parent connections
+        node.right = other_node.left
+        if other_node.left:
+            other_node.left.parent = node
+        other_node.parent = node.parent
+
+        # Reset connection for node.parent
+        # Node is root case
+        if not node.parent:
+            self.root = other_node
+        # Node is left/right of its parent cases
+        elif node == node.parent.left:
+            node.parent.left = other_node
+        elif node == node.parent.right:
+            node.parent.right = other_node
+
+        # Now set node to be child of node.right
+        other_node.left = node
+        node.parent = other_node
+
+    def right_rotate(self,node):
+        """
+        Rotate a node's left child (other_node) into node, while preserving BST
+        properties. Other_node will take the place of node and all of it's
+        connections. Node will become the child of other_node.
+
+        :param node: A node that has a left child.
+        """
+        other_node = node.left
+
+        # Reset other_node's children/parent connections
+        node.left = other_node.right
+        if other_node.right:
+            other_node.right.parent = node
+        other_node.parent = node.parent
+
+        # Reset connection for node.parent
+        # Node is root case
+        if not node.parent:
+            self.root = other_node
+        # Node is left/right of its parent cases
+        elif node == node.parent.left:
+            node.parent.left = other_node
+        elif node == node.parent.right:
+            node.parent.right = other_node
+
+        # Now set node to be child of node.right
+        other_node.right = node
+        node.parent = other_node
+
+
