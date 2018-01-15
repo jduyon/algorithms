@@ -14,14 +14,62 @@ class BinaryTree:
     """
     root = None
     node_count = 0
-    def __init__(self,data_sequence):
-        """ Run the load_tree method to the data into the tree.
+    def __init__(self, key_sequence):
+        """
+        Run the load_tree method to the data into the tree.
 
-        :param data_sequence: The list of sorted or unsorted numbers to store
+        :param key_sequence: The list of sorted or unsorted numbers to store
         Each data_array element should be floats or integers.
         """
-        for value in data_sequence:
+        for value in key_sequence:
             self.insert(value)
+
+    def __str__(self):
+        """
+        Show the tree structure by printing nodes at each height of tree
+        """
+        all_nodes = self.traverse()
+        height = self.get_height()
+        tree_levels = [[] for i in range(height)]
+        for node in all_nodes:
+            node_idx = height - self.get_height(node)
+            tree_levels[node_idx].append(node)
+
+        tree_str = ''
+        for level in tree_levels:
+            nodes = str([node_.data for node_ in level])
+            tree_str = '\n'.join([tree_str,nodes])
+        return tree_str
+
+    def get_height(self,node=None):
+        """
+        Get the count of the farthest away node of a tree starting at node.
+        Note: This class interprets a tree with only one node as having height
+        of 1. So, this is counting the max(edges) + 1 for the root.
+
+        :param node: A node. Default is None (which is root node)
+        """
+        if not self.root:
+            return 0
+        elif not node:
+            return self._get_height(self.root)
+        else:
+            return self._get_height(node)
+
+    def _get_height(self,node):
+        """
+        Recursively count the number of edges from node's both left and right
+        children and return the largest number.
+
+        :param node: A node.
+        """
+        if not node:
+            return 0
+
+        return 1 + max(
+            self._get_height(node.left),
+            self._get_height(node.right)
+        )
 
     def insert(self, value):
         """ Check if root node exists, then set root or insert node into tree.
@@ -140,7 +188,7 @@ class BinaryTree:
 
         elif not node.left and not node.right:
             if node.parent:
-                if node.parent.data >= node.data:
+                if node.parent.data >= node.data: # Node.data <= node.parent.data
                     node.parent.left = None
                 else:
                     node.parent.right = None
@@ -201,65 +249,4 @@ class BinaryTree:
             yield node
             for node_ in self._sort(node.right):
                 yield node_
-
-    def left_rotate(self,node):
-        """
-        Rotate a node's right child (other_node) into node, while preserving BST
-        properties. Other_node will take the place of node and all of it's
-        connections. Node will become the child of other_node.
-
-        :param node: A node that has a right child.
-        """
-        other_node = node.right
-
-        # Reset other_node's children/parent connections
-        node.right = other_node.left
-        if other_node.left:
-            other_node.left.parent = node
-        other_node.parent = node.parent
-
-        # Reset connection for node.parent
-        # Node is root case
-        if not node.parent:
-            self.root = other_node
-        # Node is left/right of its parent cases
-        elif node == node.parent.left:
-            node.parent.left = other_node
-        elif node == node.parent.right:
-            node.parent.right = other_node
-
-        # Now set node to be child of node.right
-        other_node.left = node
-        node.parent = other_node
-
-    def right_rotate(self,node):
-        """
-        Rotate a node's left child (other_node) into node, while preserving BST
-        properties. Other_node will take the place of node and all of it's
-        connections. Node will become the child of other_node.
-
-        :param node: A node that has a left child.
-        """
-        other_node = node.left
-
-        # Reset other_node's children/parent connections
-        node.left = other_node.right
-        if other_node.right:
-            other_node.right.parent = node
-        other_node.parent = node.parent
-
-        # Reset connection for node.parent
-        # Node is root case
-        if not node.parent:
-            self.root = other_node
-        # Node is left/right of its parent cases
-        elif node == node.parent.left:
-            node.parent.left = other_node
-        elif node == node.parent.right:
-            node.parent.right = other_node
-
-        # Now set node to be child of node.right
-        other_node.right = node
-        node.parent = other_node
-
 
