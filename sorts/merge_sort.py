@@ -39,7 +39,7 @@ class MergeSort(object):
                     j += 1
                     self.inversions += len(first[i:])
     #                print ("Inversion:",len(first[i:]),trial)
-                      
+
                 k += 1
             while (i < len(first)):
                 a[k] = first[i]
@@ -53,7 +53,7 @@ class MergeSort(object):
             return a,self.inversions
         else:
             return a
-    
+
 def helper():
     doc = """ mergesort_with_inversions.py
 

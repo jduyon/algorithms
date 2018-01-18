@@ -4,11 +4,11 @@ f(){
 }
 
 g(){
-  python ../sorts/quicksort2.py -i ${unsorted_integers} > /dev/null
+  python ../sorts/quicksort.py -i ${unsorted_integers} > /dev/null
 }
 
 h(){
-  python ../sorts/mergesort_count_inversions.py > /dev/null
+  python ../sorts/merge_sort.py -i  ${unsorted_integers} > /dev/null
 }
 
 randomselection(){
@@ -18,8 +18,11 @@ randomselection(){
     done
 }
 
+echo "Bash sort"
 time f
+echo "Quick Sort"
 time g
+Echo "Merge Sort"
 time h
 
 #time randomselection

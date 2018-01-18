@@ -11,7 +11,7 @@ class QuickSort(object):
 
     def choose_pivot(self):
         return 0
-    
+
     def partition(self, A, p, r):
         """
         This algorithm begins by setting up some variables: the pivot element 'p', a position
@@ -31,12 +31,12 @@ class QuickSort(object):
         A[i+1], A[r] = A[r], A[i+1]
         # i+1 is the 'store index'
         return i+1
-    
+
     def wrap_partition(self, A,p,r):
         R = random.choice(range(p,r))
         A[r], A[R] = A[R], A[r]
         return self.partition(A,p,r)
-    
+
     def quicksort(self, A,low,high):
         if self.verbose:
             print "IN:",A
