@@ -24,7 +24,8 @@ OK
 
 test_sort.sh:
 ```bash test_sort.sh```
-```Bash sort
+```
+Bash sort
 real	0m0.811s
 user	0m0.791s
 sys	0m0.009s
